@@ -6,9 +6,12 @@ import Zoom from "@material-ui/core/Zoom";
 function CreateArea(props) {
   const [note, setNote] = useState({ title: "", content: "" });
   const [isExpanded, setExpanded] = useState(false);
+  const [isEmpty, setEmpty] = useState("none");
 
   function handleChange(event) {
     const { value, name } = event.target;
+
+    setEmpty("none");
 
     setNote((preValue) => {
       return {
@@ -19,10 +22,15 @@ function CreateArea(props) {
   }
 
   function handleSubmit(event) {
-    props.setNotes((prevValue) => {
-      return [...prevValue, note];
-    });
-    setNote({ title: "", content: "" });
+    const {title, content} = note;
+    if(title === "" || content === ""){
+      setEmpty("block");
+    }else{
+      props.setNotes((prevValue) => {
+        return [...prevValue, note];
+      });
+      setNote({ title: "", content: "" });
+    }
     event.preventDefault();
   }
 
@@ -32,6 +40,8 @@ function CreateArea(props) {
 
   function closeInput(){
     setExpanded(false);
+    setEmpty("none");
+    setNote({ title: "", content: "" });
   }
 
   return (
@@ -53,6 +63,7 @@ function CreateArea(props) {
           placeholder="Take a note..."
           rows={isExpanded ? 3 : 1}
         />
+        <p style={{display: isEmpty, color: "red"}}>Please fill in both fields!</p>
         <Zoom in={isExpanded}>
           <Fab onClick={handleSubmit}>
             <AddIcon />
