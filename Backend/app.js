@@ -35,7 +35,7 @@ app.post("/remove/:id", (req, res) => {
     const id = req.params.id;
 
     Note.deleteOne({_id: id}, (req, res) => {
-        console.log("item deleted");
+        console.log(`Note with id: ${id} has been deleted.`);
     });
 });
 
