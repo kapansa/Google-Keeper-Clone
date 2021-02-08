@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 mongoose.connect(
-  `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.ixhgg.mongodb.net/${process.env.DATABASE}`,
+  `mongodb+srv://admin-samuel:test123@cluster0.ixhgg.mongodb.net/notesDB`,
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
