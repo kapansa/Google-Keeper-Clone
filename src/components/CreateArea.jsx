@@ -27,11 +27,7 @@ function CreateArea(props) {
     if (title === "" || content === "") {
       setEmpty("block");
     } else {
-      const newNote = {
-        title: note.title,
-        content: note.content,
-      };
-      axios.post("http://localhost:4000/create", newNote);
+      axios.post("http://localhost:4000/create", note);
       setNote({ title: "", content: "" });
     }
     event.preventDefault();

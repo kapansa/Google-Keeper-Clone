@@ -5,9 +5,7 @@ import axios from "axios";
 function Note(props) {
 
   function deleteNote(id) {
-
     axios.post(`http://localhost:4000/remove/${id}`);
-
   }
 
   return (

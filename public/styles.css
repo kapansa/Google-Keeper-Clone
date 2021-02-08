@@ -12,6 +12,16 @@ body {
   padding: 0 16px;
 }
 
+.note h1::selection{
+  background: #F5BA13;
+  color: white;
+}
+
+.note p::selection{
+  background: #F5BA13;
+  color: white;
+}
+
 header {
   background-color: #f5ba13;
   margin: auto -16px;
@@ -45,6 +55,7 @@ footer p {
   margin: 16px;
   float: left;
 }
+
 .note h1 {
   font-size: 1.1em;
   margin-bottom: 6px;
