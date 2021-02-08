@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -8,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 mongoose.connect(
-  "mongodb+srv://admin-samuel:test123@cluster0.ixhgg.mongodb.net/notesDB",
+  `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.ixhgg.mongodb.net/${process.env.DATABASE}`,
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
