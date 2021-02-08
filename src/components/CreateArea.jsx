@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
+import axios from "axios";
 
 function CreateArea(props) {
   const [note, setNote] = useState({ title: "", content: "" });
@@ -16,29 +17,31 @@ function CreateArea(props) {
     setNote((preValue) => {
       return {
         ...preValue,
-        [name]: value
+        [name]: value,
       };
     });
   }
 
   function handleSubmit(event) {
-    const {title, content} = note;
-    if(title === "" || content === ""){
+    const { title, content } = note;
+    if (title === "" || content === "") {
       setEmpty("block");
-    }else{
-      props.setNotes((prevValue) => {
-        return [...prevValue, note];
-      });
+    } else {
+      const newNote = {
+        title: note.title,
+        content: note.content,
+      };
+      axios.post("http://localhost:4000/create", newNote);
       setNote({ title: "", content: "" });
     }
     event.preventDefault();
   }
 
-  function handleClick(){
+  function handleClick() {
     setExpanded(true);
   }
 
-  function closeInput(){
+  function closeInput() {
     setExpanded(false);
     setEmpty("none");
     setNote({ title: "", content: "" });
@@ -63,13 +66,19 @@ function CreateArea(props) {
           placeholder="Take a note..."
           rows={isExpanded ? 3 : 1}
         />
-        <p style={{display: isEmpty, color: "red"}}>Please fill in both fields!</p>
+        <p style={{ display: isEmpty, color: "red" }}>
+          Please fill in both fields!
+        </p>
         <Zoom in={isExpanded}>
           <Fab onClick={handleSubmit}>
             <AddIcon />
           </Fab>
         </Zoom>
-        {isExpanded && <h1 onClick={closeInput} className="close-btn">Close</h1>}
+        {isExpanded && (
+          <h1 onClick={closeInput} className="close-btn">
+            Close
+          </h1>
+        )}
       </form>
     </div>
   );

@@ -1,13 +1,13 @@
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
+import axios from "axios";
 
 function Note(props) {
+
   function deleteNote(id) {
-    props.setNotes((prevValues) => {
-      return prevValues.filter((item, index) => {
-        return index !== id;
-      });
-    });
+
+    axios.post(`http://localhost:4000/remove/${id}`);
+
   }
 
   return (
