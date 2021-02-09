@@ -27,7 +27,7 @@ function CreateArea(props) {
     if (title === "" || content === "") {
       setEmpty("block");
     } else {
-      axios.post("http://localhost:4000/create", note);
+      axios.post("/create", note);
       setNote({ title: "", content: "" });
     }
     event.preventDefault();
@@ -48,6 +48,7 @@ function CreateArea(props) {
       <form className="create-note">
         {isExpanded && (
           <input
+            autoComplete="off"
             name="title"
             onChange={handleChange}
             value={note.title}
@@ -55,6 +56,7 @@ function CreateArea(props) {
           />
         )}
         <textarea
+          autoComplete="off"
           name="content"
           onClick={handleClick}
           onChange={handleChange}

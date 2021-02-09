@@ -1,24 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import axios from "axios";
 
+
 function Note(props) {
 
+  const [notes, setNotes] = useState([]);
+
   function deleteNote(id) {
-    axios.post(`http://localhost:4000/remove/${id}`);
+    axios.post(`/remove/${id}`);
   }
 
+  useEffect(() => {
+    fetch("/notes").then(foundNotes => {
+      if(foundNotes.ok){
+        return foundNotes.json();
+      }
+    }).then(foundNotes => setNotes(foundNotes));
+  }, [notes]);
+
   return (
-    <div className="note">
-      <h1>{props.title}</h1>
-      <p>{props.content}</p>
-      <button
-        onClick={() => {
-          deleteNote(props.id);
-        }}
-      >
-        <DeleteIcon />
-      </button>
+    <div>
+      {notes.map((item) => {
+        return (
+          <div key={item._id} className="note">
+            <h1>{item.title}</h1>
+            <p>{item.content}</p>
+            <button
+              onClick={() => {
+                deleteNote(item._id);
+              }}
+            >
+              <DeleteIcon />
+            </button>
+          </div>
+        );
+      })}
+
     </div>
   );
 }
