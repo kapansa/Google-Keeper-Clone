@@ -4,12 +4,11 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express();
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
 mongoose.connect(
-  `mongodb+srv://admin-samuel:test123@cluster0.ixhgg.mongodb.net/notesDB`,
+  `mongodb+srv://${process.env.USER_NAME}:${process.env.DB_PASSWORD}@cluster0.ixhgg.mongodb.net/notesDB`,
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
