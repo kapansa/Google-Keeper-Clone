@@ -1,17 +1,18 @@
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import Note from "./Note";
-import CreateArea from "./CreateArea";
+import NotFound from "./NotFound";
+import Home from "./Home";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
-
   return (
     <div>
-      <Header />
-      <CreateArea />
-      <Note />
-      <Footer />
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
     </div>
   );
 }
